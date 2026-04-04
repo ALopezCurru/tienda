@@ -177,8 +177,8 @@ nav {
 }
 
 .productoTarjeta {
-  height: 80%;
-  width: 40vh;
+  height: 85%;
+  width: 25;
   flex-shrink: 0;
   background-color: white;
   border-radius: 15px;
@@ -211,7 +211,7 @@ nav {
 
 .productoImagen {
   width: 80%;
-  height: 60%;
+  height: 50%;
   margin-top: 10%;
   border-radius: 9px;
 }
