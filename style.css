@@ -1,0 +1,293 @@
+/* Exportando fuentes */
+/* Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+/* Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Ajustes generales */
+* {
+  padding: 0;
+  margin: 0;
+}
+.hidden {
+  display: none;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+/* Nav */
+header {
+  width: 100%;
+  min-height: 8vh;
+  max-height: 13vh;
+  padding: 1vh;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+nav {
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: white;
+  width: 90%;
+  min-height: 6vh;
+  max-height: 11vh;
+  border-radius: 30px;
+  justify-content: space-between !important;
+  border: 0.5px solid rgba(255, 255, 255, 0.701);
+}
+#logoNavBar {
+  width: 8vh;
+  height: 8vh;
+}
+
+#linksNavBar {
+  min-width: 50vh;
+  justify-content: space-evenly !important;
+  font-family: "Roboto", sans-serif;
+}
+#linksNavBar > li > a:hover {
+  color: #e63946;
+}
+/* Hero */
+
+#Hero {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.slider-box {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.slider-box > ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  animation: slide 20s infinite alternate ease-in-out;
+}
+.slider-box > ul > li {
+  min-width: 100%;
+  height: auto;
+  list-style-type: none;
+  position: relative;
+}
+.textoSlider {
+  position: absolute;
+  left: 2vh;
+  top: 75vh;
+  padding: 2vh;
+
+  flex-direction: column;
+  align-items: start;
+  gap: 1vh;
+  z-index: 2;
+}
+.slider-box > ul > li > img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
+}
+.textoSlider > h2 {
+  font-family: "Poppins", sans-serif;
+  color: white;
+  font-weight: 700;
+}
+.textoSlider > p {
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+.textoSlider > button {
+  background-color: #e63946;
+  width: 25vh;
+  height: 5vh;
+  border-radius: 30px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border: none;
+}
+.textoSlider > button:hover {
+  background-color: #93262f;
+  cursor: pointer;
+}
+.slider-box > ul > li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(129, 0, 0, 0.7),
+    rgba(255, 0, 0, 0.2),
+    rgba(255, 0, 0, 0)
+  );
+  z-index: 1;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  20% {
+    transform: translateX(0%);
+  }
+  25% {
+    transform: translateX(-100%);
+  }
+  45% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-200%);
+  }
+  70% {
+    transform: translateX(-200%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+/* Productos en oferta */
+#productosEnOferta {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+#productosContenedor {
+  /* background-color: rgba(0, 0, 0, 0.396); */
+  width: 90%;
+  height: 80%;
+  gap: 4vh;
+  justify-content: start !important;
+  padding-left: 2%;
+  padding-right: 2%;
+
+  overflow-x: scroll;
+}
+
+.productoTarjeta {
+  height: 80%;
+  width: 40vh;
+  flex-shrink: 0;
+  background-color: white;
+  border-radius: 15px;
+  background-color: #e6394723;
+  box-shadow: 7px 3px 8px rgba(0, 0, 0, 0.25);
+  align-items: center;
+  justify-content: center !important;
+  flex-direction: column;
+  padding-bottom: 3%;
+}
+#verCatalogo {
+  background-color: #e63946;
+  width: 25vh;
+  height: 5vh;
+  border-radius: 30px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.25);
+
+  position: absolute;
+  top: 1vh;
+  right: 2vh;
+}
+
+/* Tarjetas */
+.precioAnterior {
+  text-decoration: line-through;
+}
+
+.productoImagen {
+  width: 80%;
+  height: 60%;
+  margin-top: 10%;
+  border-radius: 9px;
+}
+
+.productoInformacion {
+  width: 80%;
+  height: 40%;
+  padding-top: 4vh;
+}
+
+.productoBotones {
+  width: 80%;
+  height: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vh;
+}
+.productoDescripcion {
+  margin-bottom: 7%;
+}
+.productoAlertaOferta {
+  font-family: "Roboto", sans-serif;
+  background-color: #e63946;
+  color: white;
+  max-width: 70%;
+  width: auto;
+  height: auto;
+  min-height: 16%;
+  max-height: 35%;
+  border-radius: 9px;
+  justify-content: space-evenly !important;
+}
+.circuloOferta {
+  background-color: #93262f;
+  width: 10px;
+  height: 10px;
+  border-radius: 150px;
+}
+.productoInformacion > h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: large;
+}
+.productoInformacion > p {
+  font-family: "Roboto", sans-serif;
+  font-size: small;
+}
+.productoInformacion > b > p {
+  font-family: "Roboto", sans-serif;
+  font-size: medium;
+}
+.productoBotones > button {
+  width: 20vh;
+  height: 5vh;
+  border-radius: 30px;
+  font-family: "Roboto", sans-serif;
+  border: none;
+}
+
+.productoMasInformacion {
+  background-color: white;
+  color: black !important;
+}
+
+.productoMasInformacion:hover {
+  background-color: rgb(69, 69, 69);
+  color: white !important;
+  cursor: pointer;
+}
+.comprar {
+  background-color: #93262f;
+  color: white;
+}
+.comprar:hover {
+  background-color: #661b21;
+  color: white;
+  cursor: pointer;
+}
