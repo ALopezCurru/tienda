@@ -1,4 +1,4 @@
-// "use strict";
+"use strict";
 //========================================================
 //Definiendo Objetos del DOM
 const contenedorProductosEnOferta = document.querySelector(
@@ -8,7 +8,11 @@ const contenedorCatalogo = document.querySelector(
   "#productosCatalogoContenedor",
 );
 const modalCatalogo = document.querySelector("#modalCatalogo");
+const modalCompraConfirmacion = document.querySelector(
+  ".modalCompraConfirmacion",
+);
 const btnVerCatalogo = document.querySelector("#verCatalogo");
+
 //========================================================
 //definiendo arrays de objetos
 const descuento = 15;
@@ -112,6 +116,24 @@ const productos = [
     descripcion: "Adaptador tipo C a usb",
     precio: 100,
     oferta: false,
+    stock: 100,
+    descuento: descuento / 100,
+    activo: function () {
+      if (this.stock > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    imagen: "./img/productos/adaptadorUSB.jpg",
+    categoria: "prueba",
+  },
+  {
+    id: 7,
+    nombre: "Objeto 7 ejemplo",
+    descripcion: "Adaptador tipo C a usb",
+    precio: 560,
+    oferta: true,
     stock: 100,
     descuento: descuento / 100,
     activo: function () {
@@ -264,8 +286,8 @@ function agregarObjetosAlCatalogo(array) {
                   </div>
                   <H1 class="productoNombre">${nombre}</H1>
                   <p class="productoDescripcion">${descripcion}</p>
-                  <p class = "precios">Precio anterior Q.<span class="precioAnterior hidden">0</span></p>
-                  <b class = "precios"><p>Precio con descuento: Q.<span class="productoPrecio">${precio}</span></p></b>
+                  <p class = "precios hidden">Precio anterior Q.<span class="precioAnterior hidden">0</span></p>
+                  <b class = "precios"><p>Precio: Q.<span class="productoPrecio">${precio}</span></p></b>
                 </div>
                 <div class="productoBotones">
                     <button class="comprar" id="${id}">Comprar!</button>
@@ -288,3 +310,71 @@ btnVerCatalogo.addEventListener("click", function () {
   // modalCatalogo.classList.add("center");
   console.log("si funca");
 });
+
+// Definiendo funcionalidades de comprar y ver detalles
+// Abrir modal de confirmacion de compra
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  const btnComprar = document.querySelectorAll(".comprar");
+  btnComprar.forEach((el) => {
+    el.addEventListener("click", function (e) {
+      let htmlcarrito = "";
+      modalCompraConfirmacion.classList.remove("hidden");
+      modalCompraConfirmacion.classList.add("center");
+      const btnSeleccionado = e.target.id;
+      const values = Object.values(productosGeneral);
+      modalCompraConfirmacion.innerHTML = "";
+      for (const { id, nombre, precio, descripcion, imagen } of values) {
+        if (id == Number(btnSeleccionado)) {
+          console.log(`${id}`);
+          htmlcarrito = `
+          <div class="containerCompraConfirmacion">
+        <div class="containerImagenCompraConfirmacion">
+          <img src="${imagen}" alt="" />
+        </div>
+        <div class="containterInformacionCompraConfirmacion">
+          <h1 class="tituloInformacionCompraFinal">${nombre}</h1>
+          <p class="descripcionCompraFinal">
+            ${descripcion}
+          </p>
+          <p class="textoPrecioCompraFinal">
+            Precio Q.<span class="precioCompraFinal">${precio}</span>
+          </p>
+          <p class="cantidadCompraFinal">Cantidad</p>
+          <input
+            type="number"
+            class="inputCompraFinal"
+            placeholder="Ingrese cantidad aqui"
+          />
+          <div class="containerBotonesCompraFinal">
+            <button id="compra-producto${id}" class="confirmarCompra">Confirmar Compra</button>
+            <button class="cerrarModalCompraFinal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+          `;
+        }
+      }
+      modalCompraConfirmacion.insertAdjacentHTML("afterbegin", htmlcarrito);
+      //Cerrar modal de confirmacion de compra
+      cerrarModalCompraConfirmacion();
+
+      // Cerrar modald de compra
+    });
+  });
+});
+
+function cerrarModalCompraConfirmacion() {
+  const btnCerrarConfirmacionCompra = document.querySelectorAll(
+    ".cerrarModalCompraFinal",
+  );
+
+  btnCerrarConfirmacionCompra.forEach((el) => {
+    el.addEventListener("click", function (e) {
+      let modalSeleccionado = e.target;
+      console.log(modalSeleccionado);
+      modalCompraConfirmacion.classList.remove("center");
+      modalCompraConfirmacion.classList.add("hidden");
+    });
+  });
+}

@@ -178,7 +178,7 @@ nav {
 }
 
 .productoTarjeta {
-  height: 85%;
+  height: auto;
   width: 300px;
   flex-shrink: 0;
   background-color: white;
@@ -215,14 +215,14 @@ nav {
 
 .productoImagen {
   width: 80%;
-  height: 200px;
+  height: 250px;
   margin-top: 10%;
   border-radius: 9px;
 }
 
 .productoInformacion {
   width: 80%;
-  height: 40%;
+  height: 150px;
   padding-top: 4vh;
 }
 
@@ -236,7 +236,7 @@ nav {
   gap: 1vh;
 }
 .productoDescripcion {
-  margin-bottom: 7%;
+  margin-bottom: 10%;
 }
 .productoAlertaOferta {
   font-family: "Roboto", sans-serif;
@@ -262,7 +262,7 @@ nav {
 }
 .productoInformacion > p {
   font-family: "Roboto", sans-serif;
-  font-size: small;
+  font-size: smaller;
 }
 .productoInformacion > b > p {
   font-family: "Roboto", sans-serif;
@@ -298,11 +298,12 @@ nav {
 /* Modal catalogo */
 #modalCatalogo {
   position: absolute;
+
   z-index: 999;
   top: 0;
   max-width: 100%;
-  height: auto;
-  min-height: 500vh;
+  min-height: 100vh;
+
   color: white;
 
   /* display: flex;
@@ -402,8 +403,100 @@ nav {
   /* background-color: red; */
 }
 
-.productosCatalogoContenedor > .productoTarjeta {
-  height: 40px !important;
-  width: 30px !important;
-  background-color: #676364 !important;
+/* Modal confirmacion compra */
+.modalCompraConfirmacion {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.containerCompraConfirmacion {
+  background-color: #e63946;
+  width: 80%;
+  height: 80vh;
+  border: 2px solid white;
+  border-radius: 30px;
+  box-shadow: 9px 7px 30px black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1%; /* Borrar por si acaso */
+  gap: 2%;
+}
+
+.containerImagenCompraConfirmacion {
+  width: 30%;
+  height: 60vh;
+}
+.containerImagenCompraConfirmacion > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.containterInformacionCompraConfirmacion {
+  width: 70%;
+  height: 60vh;
+  /* background-color: gray; */
+  /* border: 1px solid white; */
+  position: relative;
+}
+.tituloInformacionCompraFinal {
+  font-family: "Roboto", sans-serif;
+  font-weight: bolder;
+  border-bottom: 1px solid white;
+  color: white;
+}
+.descripcionCompraFinal {
+  font-family: "Poppins", sans-serif;
+  font-weight: light;
+  color: white;
+}
+.textoPrecioCompraFinal,
+.cantidadCompraFinal {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+  color: white;
+}
+
+.inputCompraFinal::placeholder {
+  color: #e63946;
+}
+
+.inputCompraFinal {
+  background-color: transparent;
+  border: 1px solid white;
+  background-color: white;
+  color: #e63946;
+  width: 30%;
+  height: 4vh;
+  border-radius: 30px;
+  padding: 1vh;
+}
+.containerBotonesCompraFinal {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.containerBotonesCompraFinal > button {
+  background-color: #e63946;
+  width: 25vh;
+  height: 5vh;
+  border-radius: 30px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border: 1px solid white;
+}
+
+.containerBotonesCompraFinal > button:hover {
+  background-color: #93262f;
+  cursor: pointer;
 }
