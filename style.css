@@ -24,6 +24,9 @@ a {
   text-decoration: none;
   color: white;
 }
+a:hover {
+  color: #e63946;
+}
 /* Nav */
 header {
   width: 100%;
@@ -56,9 +59,7 @@ nav {
   justify-content: space-evenly !important;
   font-family: "Roboto", sans-serif;
 }
-#linksNavBar > li > a:hover {
-  color: #e63946;
-}
+
 /* Hero */
 
 #Hero {
@@ -203,6 +204,9 @@ nav {
   top: 1vh;
   right: 2vh;
 }
+#verCatalogo:hover {
+  cursor: pointer;
+}
 
 /* Tarjetas */
 .precioAnterior {
@@ -211,7 +215,7 @@ nav {
 
 .productoImagen {
   width: 80%;
-  height: 50%;
+  height: 200px;
   margin-top: 10%;
   border-radius: 9px;
 }
@@ -290,4 +294,116 @@ nav {
   background-color: #661b21;
   color: white;
   cursor: pointer;
+}
+/* Modal catalogo */
+#modalCatalogo {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  max-width: 100%;
+  height: auto;
+  min-height: 500vh;
+  color: white;
+
+  /* display: flex;
+  flex-direction: column; */
+}
+#navCatalogo {
+  max-width: 100%;
+  min-height: 10vh;
+  height: 10vh;
+  max-height: 15vh;
+
+  font-family: "Roboto", sans-serif;
+}
+
+#logoNavBarCatalogo {
+  width: 15%;
+  min-height: 100%;
+}
+
+#navBarCatalogo {
+  min-height: 10vh;
+  height: 10vh;
+  max-height: 15vh;
+  border: none;
+  border-radius: 0px;
+  min-width: 100%;
+  background-color: #e63947;
+}
+#linksNavBarCatalogo {
+  width: 40%;
+  min-height: 10vh;
+  height: 10vh;
+  max-height: 15vh;
+  justify-content: space-evenly !important;
+}
+.seccionesCatalogo {
+  background-color: white;
+  width: 100%;
+  height: auto;
+  min-height: 500vh;
+  color: black;
+  display: flex;
+  flex-direction: row;
+}
+
+.filtros {
+  width: 20%;
+  min-height: 100vh;
+  color: white;
+  box-shadow: 3px 5px 50px black;
+}
+.filtros > h1 {
+  margin-top: 10%;
+  color: black;
+  font-family: "Poppins", sans-serif;
+}
+.filtros > button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px black solid;
+  width: 100%;
+  height: auto;
+  min-height: 6vh;
+  max-height: 8vh;
+}
+.filtros > .categoriasCatalogo > button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px black solid;
+  width: 100%;
+  height: auto;
+  min-height: 6vh;
+  max-height: 8vh;
+}
+.filtros > .categoriasCatalogo > button:hover {
+  background-color: #676364;
+  color: white;
+  cursor: pointer;
+}
+
+.filtros > button:hover {
+  background-color: #676364;
+  color: white;
+  cursor: pointer;
+}
+#productosCatalogoContenedor {
+  margin-top: 1%;
+  width: 80%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4rem;
+
+  /* background-color: red; */
+}
+
+.productosCatalogoContenedor > .productoTarjeta {
+  height: 40px !important;
+  width: 30px !important;
+  background-color: #676364 !important;
 }

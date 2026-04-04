@@ -72,6 +72,62 @@
         <button id="verCatalogo">Ver Catalogo</button>
       </section>
     </main>
+    <!-- Aqui ira el modal de catalogo -->
+      <div id="modalCatalogo" class="hidden">
+      <div id="navCatalogo" class="center">
+        <nav id="navBarCatalogo" class="center">
+          <a href="/"
+            ><img src="./img/logo.png" alt="" id="logoNavBarCatalogo"
+          /></a>
+          <ul id="linksNavBarCatalogo" class="center">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Carrito</a></li>
+            <li class="hidden"><a href="#">Filtros</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="seccionesCatalogo">
+        <div class="filtros">
+          <h1>Filtros</h1>
+          <button>Ver productos en oferta</button>
+          <button>Ver productos sin ofertaa</button>
+
+          <h1>Categorias</h1>
+          <div class="categoriasCatalogo">
+            <button>Esto es una categoria</button>
+          </div>
+        </div>
+
+        <div id="productosCatalogoContenedor">
+          <!-- Prueba -->
+          <div class="productoTarjeta center">
+            <img
+              class="productoImagen"
+              src="./img/pexels-igchandankumar-16442035.jpg"
+              alt=""
+            />
+
+            <div class="productoInformacion">
+              <div class="productoAlertaOferta center">
+                <div class="circuloOferta"></div>
+                <p>Producto en Oferta</p>
+              </div>
+              <h1 class="productoNombre">Nombre del producto</h1>
+              <p class="productoDescripcion">Descripcion corta del producto</p>
+              <p>Precio anterior Q.<span class="precioAnterior">100</span></p>
+              <b
+                ><p>Precio: Q.<span class="productoPrecio">100</span></p></b
+              >
+            </div>
+            <div class="productoBotones">
+              <button class="comprar">Comprar!</button>
+              <button class="productoMasInformacion">Detalles</button>
+            </div>
+          </div>
+          <!-- Fin prueba -->
+        </div>
+      </div>
+    </div>
   </body>
   <script src="./script.js"></script>
 </html>

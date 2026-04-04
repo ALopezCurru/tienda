@@ -1,21 +1,27 @@
-"use strict";
+// "use strict";
 //========================================================
 //Definiendo Objetos del DOM
 const contenedorProductosEnOferta = document.querySelector(
   "#productosContenedor",
 );
+const contenedorCatalogo = document.querySelector(
+  "#productosCatalogoContenedor",
+);
+const modalCatalogo = document.querySelector("#modalCatalogo");
+const btnVerCatalogo = document.querySelector("#verCatalogo");
 //========================================================
 //definiendo arrays de objetos
 const descuento = 15;
 const productosConDescuento = [];
 const productosSinDescuento = [];
+
 const productos = [
   {
     id: 1,
     nombre: "Celular marca patito",
     descripcion: "Telefono celular 8GB ram 1TB almacenamiento",
     precio: 1000,
-    oferta: false,
+    oferta: true,
     stock: 100,
     descuento: descuento / 100,
     activo: function () {
@@ -143,6 +149,7 @@ function productosEnDescuento(array) {
         activo: activo,
         precio: precio - precio * descuento,
         imagen: imagen,
+        oferta: oferta,
       });
     } else if (!oferta) {
       productosSinDescuento.push({
@@ -152,11 +159,14 @@ function productosEnDescuento(array) {
         activo: activo,
         precio: precio,
         imagen: imagen,
+        oferta: oferta,
       });
     }
   }
 }
 productosEnDescuento(productos);
+const productosGeneral = [];
+productosGeneral.push(...productosConDescuento, ...productosSinDescuento);
 
 ///========================================================
 //Destrucurando el array de objetos con descuentos para mostarlo en el array
@@ -200,3 +210,81 @@ function mostrandoObjetosConDescuentosEnDOM(array) {
 }
 
 mostrandoObjetosConDescuentosEnDOM(productosConDescuento);
+
+//========================================================
+// Destructurando array de objetos en general para agregar los productos al catalogo
+function agregarObjetosAlCatalogo(array) {
+  contenedorCatalogo.innerHTML = " ";
+  const values = Object.values(array);
+  let htmlCatalogo = "";
+  for (const {
+    nombre,
+    id,
+    descripcion,
+    precio,
+    activo,
+    imagen,
+    oferta,
+    precioAnterior,
+  } of values) {
+    if (oferta) {
+      console.log(`${id} - ${nombre} - ${oferta}`);
+      htmlCatalogo = `
+      <div class="productoTarjeta center">    
+                     
+                <img class="productoImagen" src="${imagen}" alt="imagenDeProducto">
+           
+                <div class="productoInformacion">
+                  <div class="productoAlertaOferta center">
+                    <div class="circuloOferta"></div>
+                    <p>Producto en Oferta</p>       
+                  </div>
+                  <H1 class="productoNombre">${nombre}</H1>
+                  <p class="productoDescripcion">${descripcion}</p>
+                  <p class = "precios">Precio anterior Q.<span class="precioAnterior">${precioAnterior}</span></p>
+                  <b class = "precios"><p>Precio con descuento: Q.<span class="productoPrecio">${precio}</span></p></b>
+                </div>
+                <div class="productoBotones">
+                    <button class="comprar" id="${id}">Comprar!</button>
+                    <button class="productoMasInformacion">Ver detalles!</button>
+                </div>
+            </div>
+    `;
+    } else {
+      console.log(`${id} - ${nombre} - ${oferta}`);
+      htmlCatalogo = `
+     <div class="productoTarjeta center">    
+                     
+                <img class="productoImagen" src="${imagen}" alt="imagenDeProducto">
+           
+                <div class="productoInformacion">
+                  <div class="productoAlertaOferta hidden">
+                    <div class="circuloOferta"></div>
+                    <p>Producto en Oferta</p>       
+                  </div>
+                  <H1 class="productoNombre">${nombre}</H1>
+                  <p class="productoDescripcion">${descripcion}</p>
+                  <p class = "precios">Precio anterior Q.<span class="precioAnterior hidden">0</span></p>
+                  <b class = "precios"><p>Precio con descuento: Q.<span class="productoPrecio">${precio}</span></p></b>
+                </div>
+                <div class="productoBotones">
+                    <button class="comprar" id="${id}">Comprar!</button>
+                    <button class="productoMasInformacion">Ver detalles!</button>
+                </div>
+            </div>
+    `;
+    }
+
+    contenedorCatalogo.insertAdjacentHTML("afterbegin", htmlCatalogo);
+  }
+}
+
+agregarObjetosAlCatalogo(productosGeneral);
+
+//========================================================
+// Definiendo active listeners
+btnVerCatalogo.addEventListener("click", function () {
+  modalCatalogo.classList.remove("hidden");
+  // modalCatalogo.classList.add("center");
+  console.log("si funca");
+});
