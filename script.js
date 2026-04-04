@@ -61,7 +61,7 @@ const productos = [
         return false;
       }
     },
-    imagen: "./img/productos/AudifonosInalambricos.jpg",
+    imagen: "./img/productos/audifonosInalambricos.jpg",
     categoria: "prueba",
   },
   {
