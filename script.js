@@ -18,7 +18,8 @@ const btnVerCatalogo = document.querySelector("#verCatalogo");
 const descuento = 15;
 const productosConDescuento = [];
 const productosSinDescuento = [];
-
+const carritoDeCompras = [];
+const subTotales = [];
 const productos = [
   {
     id: 1,
@@ -346,8 +347,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
             class="inputCompraFinal"
             placeholder="Ingrese cantidad aqui"
           />
+          
           <div class="containerBotonesCompraFinal">
-            <button id="compra-producto${id}" class="confirmarCompra">Confirmar Compra</button>
+            <button id="${id}" class="confirmarCompra">Confirmar Compra</button>
             <button class="cerrarModalCompraFinal">Cancelar</button>
           </div>
         </div>
@@ -358,8 +360,9 @@ window.addEventListener("DOMContentLoaded", (event) => {
       modalCompraConfirmacion.insertAdjacentHTML("afterbegin", htmlcarrito);
       //Cerrar modal de confirmacion de compra
       cerrarModalCompraConfirmacion();
-
       // Cerrar modald de compra
+      // Confirmar compra
+      calcularSubTotalProducto();
     });
   });
 });
@@ -368,13 +371,38 @@ function cerrarModalCompraConfirmacion() {
   const btnCerrarConfirmacionCompra = document.querySelectorAll(
     ".cerrarModalCompraFinal",
   );
-
   btnCerrarConfirmacionCompra.forEach((el) => {
     el.addEventListener("click", function (e) {
       let modalSeleccionado = e.target;
       console.log(modalSeleccionado);
       modalCompraConfirmacion.classList.remove("center");
       modalCompraConfirmacion.classList.add("hidden");
+    });
+  });
+}
+
+function calcularSubTotalProducto() {
+  const btnConfirmarCompra = document.querySelectorAll(".confirmarCompra");
+  btnConfirmarCompra.forEach((el) => {
+    el.addEventListener("click", function (e) {
+      const inputNumeroProductos =
+        document.querySelector(".inputCompraFinal").value;
+      let btnComprar = e.target.id;
+      console.log(`id: ${btnComprar} - ${inputNumeroProductos}`);
+
+      let values = Object.values(productosGeneral);
+      for (const { nombre, id, precio } of values) {
+        if (id == btnComprar) {
+          let subTotal = precio * Number(inputNumeroProductos);
+          carritoDeCompras.push({
+            nombre: nombre,
+            id: id,
+            cantidad: inputNumeroProductos,
+            subTotal: subTotal,
+          });
+          subTotales.push(Number(subTotal));
+        }
+      }
     });
   });
 }
