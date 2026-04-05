@@ -502,73 +502,101 @@ nav {
 }
 
 /* Modal carrito de compras */
-#modalCarritoDeCompras {
+#carritoDeCompras {
   position: fixed;
-  inset: 0;
+  top: 0;
+  right: 0;
   z-index: 999;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  background-color: #f5f5f53b;
+  background-color: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  color: white;
 }
 
-#contenedorCarritoDeCompras {
-  width: 100%;
-  height: 100vh;
+#carritoDeComprasSideBar {
+  position: fixed;
+  top: 0;
+  right: 0;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 4%;
-}
-
-#contenedorArticulosEnCarrito {
-  width: 40%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: white;
-  overflow-y: scroll;
-}
-#contenedorResumen {
+  background-color: #661b21;
   width: 30%;
   height: 100vh;
-  background-color: white;
-}
-.cartaProductoEnCarrito {
-  margin-bottom: 2%;
-  margin-top: 2%;
-  width: 100%;
-  height: 135px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.242);
 
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
-
-.contenedorImagenCarrito {
-  width: 120px;
-  height: 120px;
-  object-position: center;
-  object-fit: contain;
-}
-.contenedorImagenCarrito > img {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-}
-
-.informacionDeProducto {
-  margin-left: 2%;
-}
-.informacionDeProducto > h1 {
+#carritoDeComprasSideBar > h1 {
   font-family: "Roboto", sans-serif;
+  font-weight: bolder;
 }
-.informacionDeProducto > p {
+
+#carritoDeComprasSideBar > div > div > h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+#productosContenedorCarrito {
+  width: 90%;
+  height: 500px;
+  border-radius: 9px;
+  box-shadow: 5px 5px 10px black;
+  background-color: rgba(255, 255, 255, 0.169);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-bottom: 3%;
+}
+
+.tarjetaProductoCarrito {
+  width: 100%;
+
+  border-bottom: 1px solid white;
+}
+.tarjetaProductoCarrito > p {
   font-family: "Poppins", sans-serif;
+}
+
+.tarjetaProductoCarrito > .cantidadProductos {
+  background-color: #676364;
+  width: 10%;
+  height: 10%;
+}
+
+#contenedorBotonesCarrito > button {
+  background-color: #e63946;
+  width: 25vh;
+  height: 5vh;
+  border-radius: 30px;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  border: none;
+}
+
+#contenedorBotonesCarrito > button:hover {
+  background-color: #e76973;
+  cursor: pointer;
+}
+
+#totalesCarrito > p {
+  font-family: "Poppins", sans-serif;
+}
+#cerrarCarritoDeCompras {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+}
+#cerrarCarritoDeCompras:hover {
+  background-color: #676364;
+  cursor: pointer;
+}
+
+.contenedorBotonCerrarCarrito {
+  width: 90%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 }

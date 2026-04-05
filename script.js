@@ -7,12 +7,21 @@ const contenedorProductosEnOferta = document.querySelector(
 const contenedorCatalogo = document.querySelector(
   "#productosCatalogoContenedor",
 );
+const contenedorCarrito = document.querySelector("#productosContenedorCarrito");
 const modalCatalogo = document.querySelector("#modalCatalogo");
 const modalCompraConfirmacion = document.querySelector(
   ".modalCompraConfirmacion",
 );
-const btnVerCatalogo = document.querySelector("#verCatalogo");
+const modalCarritoDeCompras = document.querySelector("#carritoDeCompras");
 
+const btnVerCatalogo = document.querySelector("#verCatalogo");
+const btnCarritoDeCompras = document.querySelector("#btnCarritoDeCompras");
+const btnCerrarCarritoDeCompras = document.querySelector(
+  "#cerrarCarritoDeCompras",
+);
+
+const DOMSubTotal = document.querySelector("#subTotal");
+const DOMTotal = document.querySelector("#total");
 //========================================================
 //definiendo arrays de objetos
 const descuento = 15;
@@ -312,6 +321,15 @@ btnVerCatalogo.addEventListener("click", function () {
   console.log("si funca");
 });
 
+btnCarritoDeCompras.addEventListener("click", function () {
+  modalCarritoDeCompras.classList.remove("hidden");
+  agregarProductosAlCarrito(carritoDeCompras);
+  calcularTotales(subTotales);
+});
+
+btnCerrarCarritoDeCompras.addEventListener("click", function () {
+  modalCarritoDeCompras.classList.add("hidden");
+});
 // Definiendo funcionalidades de comprar y ver detalles
 // Abrir modal de confirmacion de compra
 
@@ -327,7 +345,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       modalCompraConfirmacion.innerHTML = "";
       for (const { id, nombre, precio, descripcion, imagen } of values) {
         if (id == Number(btnSeleccionado)) {
-          console.log(`${id}`);
           htmlcarrito = `
           <div class="containerCompraConfirmacion">
         <div class="containerImagenCompraConfirmacion">
@@ -392,7 +409,7 @@ function calcularSubTotalProducto() {
 
       let values = Object.values(productosGeneral);
       for (const { nombre, id, precio } of values) {
-        if (id == btnComprar) {
+        if (id == btnComprar && Number(inputNumeroProductos) > 0) {
           let subTotal = precio * Number(inputNumeroProductos);
           carritoDeCompras.push({
             nombre: nombre,
@@ -401,8 +418,37 @@ function calcularSubTotalProducto() {
             subTotal: subTotal,
           });
           subTotales.push(Number(subTotal));
+          console.log(subTotales);
+          console.log(carritoDeCompras);
         }
       }
     });
   });
+}
+
+// const arrayPrueba = [1, 2, 3, 4, 5];
+function calcularTotales(array) {
+  let subTotales = 0;
+  const values = Object.values(array);
+  for (let x of values) {
+    subTotales += x;
+  }
+  const totales = subTotales + subTotales * 0.15;
+  console.log(`SubTotales: ${subTotales} - Totales: ${totales}`);
+  DOMSubTotal.textContent = subTotales;
+  DOMTotal.textContent = totales;
+}
+
+function agregarProductosAlCarrito(array) {
+  const values = Object.values(array);
+  contenedorCarrito.innerHTML = "";
+  for (const { nombre, cantidad, subTotal, id } of values) {
+    let html = `
+   <div class="tarjetaProductoCarrito">
+          <h2><span class="cantidadProductos">${cantidad}</span> - ${nombre}</h2>
+          <p>Subtotal: ${subTotal}</p>
+        </div>
+  `;
+    contenedorCarrito.insertAdjacentHTML("afterbegin", html);
+  }
 }
