@@ -20,6 +20,7 @@ const btnCerrarCarritoDeCompras = document.querySelector(
   "#cerrarCarritoDeCompras",
 );
 
+const btnLogoCatalogo = document.querySelector("#logoNavBarCatalogo");
 const DOMSubTotal = document.querySelector("#subTotal");
 const DOMTotal = document.querySelector("#total");
 //========================================================
@@ -125,7 +126,7 @@ const productos = [
     nombre: "Adaptador tipo C",
     descripcion: "Adaptador tipo C a usb",
     precio: 100,
-    oferta: false,
+    oferta: true,
     stock: 100,
     descuento: descuento / 100,
     activo: function () {
@@ -142,7 +143,7 @@ const productos = [
     id: 7,
     nombre: "Objeto 7 ejemplo",
     descripcion: "Adaptador tipo C a usb",
-    precio: 560,
+    precio: 50,
     oferta: true,
     stock: 100,
     descuento: descuento / 100,
@@ -159,7 +160,8 @@ const productos = [
 ];
 
 //========================================================
-//Funcion para agregar los productos al array de productos en oferta y los que no estan en oferta
+//Deprecated
+// Funcion para agregar los productos al array de productos en oferta y los que no estan en oferta
 function productosEnDescuento(array) {
   const values = Object.values(array);
   for (const {
@@ -197,6 +199,8 @@ function productosEnDescuento(array) {
   }
 }
 productosEnDescuento(productos);
+//========================================================
+
 const productosGeneral = [];
 productosGeneral.push(...productosConDescuento, ...productosSinDescuento);
 
@@ -315,6 +319,7 @@ agregarObjetosAlCatalogo(productosGeneral);
 
 //========================================================
 // Definiendo active listeners
+
 btnVerCatalogo.addEventListener("click", function () {
   modalCatalogo.classList.remove("hidden");
   // modalCatalogo.classList.add("center");
@@ -422,6 +427,9 @@ function calcularSubTotalProducto() {
           console.log(carritoDeCompras);
         }
       }
+      // Cerrar modal de confirmacion despues de confirmar compra
+      modalCompraConfirmacion.classList.remove("center");
+      modalCompraConfirmacion.classList.add("hidden");
     });
   });
 }
