@@ -553,11 +553,32 @@ nav {
   width: 100%;
 
   border-bottom: 1px solid white;
+  display: flex;
+  flex-direction: row;
 }
-.tarjetaProductoCarrito > p {
+.tarjetaProductoCarrito > .contenedorInformacionCarrito > p {
   font-family: "Poppins", sans-serif;
 }
+.tarjetaProductoCarrito > .contenedorInformacionCarrito > h2 {
+  font-family: "Roboto", sans-serif;
+}
+.contenedorImagenCarrito {
+  width: 25%;
+  height: 100px;
+  object-fit: contain;
+}
+.contenedorInformacionCarrito {
+  width: 70%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
 
+  justify-content: center;
+}
+.imagenCarrito {
+  width: 100%;
+  height: 100%;
+}
 .tarjetaProductoCarrito > .cantidadProductos {
   background-color: #676364;
   width: 10%;

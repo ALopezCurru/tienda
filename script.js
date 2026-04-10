@@ -23,6 +23,8 @@ const btnCerrarCarritoDeCompras = document.querySelector(
 const btnLogoCatalogo = document.querySelector("#logoNavBarCatalogo");
 const DOMSubTotal = document.querySelector("#subTotal");
 const DOMTotal = document.querySelector("#total");
+const cerrarCatalogo = document.querySelector("#cerrarModalCatalogo");
+const btnCarritoEnCatalogo = document.querySelector("#carritoEnCatalogo");
 //========================================================
 //definiendo arrays de objetos
 const descuento = 15;
@@ -160,7 +162,6 @@ const productos = [
 ];
 
 //========================================================
-//Deprecated
 // Funcion para agregar los productos al array de productos en oferta y los que no estan en oferta
 function productosEnDescuento(array) {
   const values = Object.values(array);
@@ -337,7 +338,6 @@ btnCerrarCarritoDeCompras.addEventListener("click", function () {
 });
 // Definiendo funcionalidades de comprar y ver detalles
 // Abrir modal de confirmacion de compra
-
 window.addEventListener("DOMContentLoaded", (event) => {
   const btnComprar = document.querySelectorAll(".comprar");
   btnComprar.forEach((el) => {
@@ -389,6 +389,18 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
+cerrarCatalogo.addEventListener("click", function () {
+  modalCatalogo.classList.add("hidden");
+});
+
+btnCarritoEnCatalogo.addEventListener("click", function () {
+  modalCarritoDeCompras.classList.remove("hidden");
+  agregarProductosAlCarrito(carritoDeCompras);
+  calcularTotales(subTotales);
+});
+//========================================================
+
+// Funcion para cerrar el modal de compra - despues de darle click a comprar en la tarjeta
 function cerrarModalCompraConfirmacion() {
   const btnCerrarConfirmacionCompra = document.querySelectorAll(
     ".cerrarModalCompraFinal",
@@ -403,6 +415,7 @@ function cerrarModalCompraConfirmacion() {
   });
 }
 
+//Funcion para agregar los productos al carrito despues de darle click a  comprar
 function calcularSubTotalProducto() {
   const btnConfirmarCompra = document.querySelectorAll(".confirmarCompra");
   btnConfirmarCompra.forEach((el) => {
@@ -413,12 +426,13 @@ function calcularSubTotalProducto() {
       console.log(`id: ${btnComprar} - ${inputNumeroProductos}`);
 
       let values = Object.values(productosGeneral);
-      for (const { nombre, id, precio } of values) {
+      for (const { nombre, id, precio, imagen } of values) {
         if (id == btnComprar && Number(inputNumeroProductos) > 0) {
           let subTotal = precio * Number(inputNumeroProductos);
           carritoDeCompras.push({
             nombre: nombre,
             id: id,
+            imagen: imagen,
             cantidad: inputNumeroProductos,
             subTotal: subTotal,
           });
@@ -435,6 +449,7 @@ function calcularSubTotalProducto() {
 }
 
 // const arrayPrueba = [1, 2, 3, 4, 5];
+//Funcion para calcular el subTotal y el Total
 function calcularTotales(array) {
   let subTotales = 0;
   const values = Object.values(array);
@@ -446,17 +461,26 @@ function calcularTotales(array) {
   DOMSubTotal.textContent = subTotales;
   DOMTotal.textContent = totales;
 }
-
+//Funcion para mostrar los elementos en el carrito
 function agregarProductosAlCarrito(array) {
   const values = Object.values(array);
   contenedorCarrito.innerHTML = "";
-  for (const { nombre, cantidad, subTotal, id } of values) {
+  for (const { nombre, cantidad, subTotal, id, imagen } of values) {
     let html = `
    <div class="tarjetaProductoCarrito">
-          <h2><span class="cantidadProductos">${cantidad}</span> - ${nombre}</h2>
-          <p>Subtotal: ${subTotal}</p>
+          <div class="contenedorImagenCarrito">
+            <img src="${imagen}" alt="" class="imagenCarrito">
+          </div>
+          <div class="contenedorInformacionCarrito">
+            <h2><span class="cantidadProductos">${cantidad}</span> - ${nombre}</h2>
+          <p>${subTotal}</p>
+          
+          </div>
         </div>
   `;
     contenedorCarrito.insertAdjacentHTML("afterbegin", html);
   }
 }
+
+//========================================================
+//Funcion para cerrar el catalogo
