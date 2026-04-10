@@ -325,6 +325,7 @@ btnVerCatalogo.addEventListener("click", function () {
   modalCatalogo.classList.remove("hidden");
   // modalCatalogo.classList.add("center");
   console.log("si funca");
+  window.scrollTo(0, 0);
 });
 
 btnCarritoDeCompras.addEventListener("click", function () {
@@ -335,6 +336,7 @@ btnCarritoDeCompras.addEventListener("click", function () {
 
 btnCerrarCarritoDeCompras.addEventListener("click", function () {
   modalCarritoDeCompras.classList.add("hidden");
+  window.scrollTo(0, 0);
 });
 // Definiendo funcionalidades de comprar y ver detalles
 // Abrir modal de confirmacion de compra
@@ -481,6 +483,3 @@ function agregarProductosAlCarrito(array) {
     contenedorCarrito.insertAdjacentHTML("afterbegin", html);
   }
 }
-
-//========================================================
-//Funcion para cerrar el catalogo
