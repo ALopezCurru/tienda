@@ -13,18 +13,18 @@ const modalCompraConfirmacion = document.querySelector(
   ".modalCompraConfirmacion",
 );
 const modalCarritoDeCompras = document.querySelector("#carritoDeCompras");
-
 const btnVerCatalogo = document.querySelector("#verCatalogo");
 const btnCarritoDeCompras = document.querySelector("#btnCarritoDeCompras");
 const btnCerrarCarritoDeCompras = document.querySelector(
   "#cerrarCarritoDeCompras",
 );
-
 const btnLogoCatalogo = document.querySelector("#logoNavBarCatalogo");
 const DOMSubTotal = document.querySelector("#subTotal");
 const DOMTotal = document.querySelector("#total");
 const cerrarCatalogo = document.querySelector("#cerrarModalCatalogo");
 const btnCarritoEnCatalogo = document.querySelector("#carritoEnCatalogo");
+const finalizarCompra = document.querySelector("#finalizarCompra");
+const regresarAComprar = document.querySelector("#regresarAComprar");
 //========================================================
 //definiendo arrays de objetos
 const descuento = 15;
@@ -399,6 +399,19 @@ btnCarritoEnCatalogo.addEventListener("click", function () {
   modalCarritoDeCompras.classList.remove("hidden");
   agregarProductosAlCarrito(carritoDeCompras);
   calcularTotales(subTotales);
+});
+
+finalizarCompra.addEventListener("click", function () {
+  console.log("hola");
+  carritoDeCompras.length = 0;
+
+  contenedorCarrito.innerHTML = "";
+  alert("Gracias por tu compra :)");
+});
+
+regresarAComprar.addEventListener("click", function () {
+  modalCarritoDeCompras.classList.add("hidden");
+  console.log("hola");
 });
 //========================================================
 
