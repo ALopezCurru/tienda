@@ -1,16 +1,13 @@
 "use strict";
-//========================================================
+
 import { productos } from "./products.js";
 import { DOM } from "./DOMObjects.js";
 
-//========================================================
-//definiendo arrays de objetos
 const productosConDescuento = [];
 const productosSinDescuento = [];
 const carritoDeCompras = [];
 const subTotales = [];
 
-//========================================================
 // Funcion para agregar los productos al array de productos en oferta y los que no estan en oferta
 function productosEnDescuento(array) {
   const values = Object.values(array);
@@ -50,10 +47,10 @@ function productosEnDescuento(array) {
   }
 }
 productosEnDescuento(productos);
-//========================================================
+
 const productosGeneral = [];
 productosGeneral.push(...productosConDescuento, ...productosSinDescuento);
-///========================================================
+
 //Destrucurando el array de objetos con descuentos para mostarlo en el array
 function mostrandoObjetosConDescuentosEnDOM(array) {
   let tarjetaOfertas;
@@ -95,7 +92,7 @@ function mostrandoObjetosConDescuentosEnDOM(array) {
   }
 }
 mostrandoObjetosConDescuentosEnDOM(productosConDescuento);
-//========================================================
+
 // Destructurando array de objetos en general para agregar los productos al catalogo
 export function agregarObjetosAlCatalogo(array) {
   DOM.contenedorCatalogo.innerHTML = " ";
@@ -165,8 +162,6 @@ export function agregarObjetosAlCatalogo(array) {
   }
 }
 agregarObjetosAlCatalogo(productosGeneral);
-//========================================================
-// Definiendo active listeners
 
 // Definiendo funcionalidades de comprar y ver detalles
 // Abrir modal de confirmacion de compra
@@ -221,8 +216,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
-//========================================================
-
 // Funcion para cerrar el modal de compra - despues de darle click a comprar en la tarjeta
 function cerrarModalCompraConfirmacion() {
   const btnCerrarConfirmacionCompra = document.querySelectorAll(
@@ -273,7 +266,6 @@ function calcularSubTotalProducto() {
   });
 }
 
-// const arrayPrueba = [1, 2, 3, 4, 5];
 //Funcion para calcular el subTotal y el Total
 function calcularTotales(array) {
   let subTotales = 0;
