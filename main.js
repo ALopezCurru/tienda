@@ -5,7 +5,6 @@ import { DOM } from "./DOMObjects.js";
 
 //========================================================
 //definiendo arrays de objetos
-
 const productosConDescuento = [];
 const productosSinDescuento = [];
 const carritoDeCompras = [];
@@ -319,6 +318,7 @@ function calcularAhorro(array) {
 }
 
 //========================================================
+// B - O - T - O - N - E - S
 //========================================================
 DOM.btnVerCatalogo.addEventListener("click", function () {
   DOM.modalCatalogo.classList.remove("hidden");
