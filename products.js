@@ -127,4 +127,40 @@ export const productos = [
     imagen: "./img/productos/adaptadorUSB.jpg",
     categoria: "prueba",
   },
+  {
+    id: 8,
+    nombre: "Mando inalambrico",
+    descripcion: "Control inalambrico Xbox",
+    precio: 500,
+    oferta: false,
+    stock: 60,
+    descuento: descuento / 100,
+    activo: function () {
+      if (this.stock > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    imagen: "./img/productos/controlVideoJuegos.jpg",
+    categoria: "prueba",
+  },
+  {
+    id: 9,
+    nombre: "Consola de VideoJuegos",
+    descripcion: "Consola de videojuegos polystation 4",
+    precio: 5000,
+    oferta: true,
+    stock: 10,
+    descuento: descuento / 100,
+    activo: function () {
+      if (this.stock > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    imagen: "./img/productos/ps4.jpg",
+    categoria: "prueba",
+  },
 ];

@@ -275,8 +275,8 @@ function calcularTotales(array) {
   }
   const totales = subTotales + subTotales * 0.15;
   console.log(`SubTotales: ${subTotales} - Totales: ${totales}`);
-  DOMSubTotal.textContent = subTotales;
-  DOMTotal.textContent = totales;
+  DOM.DOMSubTotal.textContent = subTotales;
+  DOM.DOMTotal.textContent = totales;
 }
 //Funcion para mostrar los elementos en el carrito
 function agregarProductosAlCarrito(array) {
@@ -339,6 +339,7 @@ DOM.btnCarritoEnCatalogo.addEventListener("click", function () {
   DOM.modalCarritoDeCompras.classList.remove("hidden");
   agregarProductosAlCarrito(carritoDeCompras);
   calcularTotales(subTotales);
+  calcularAhorro(carritoDeCompras);
 });
 
 DOM.finalizarCompra.addEventListener("click", function () {
