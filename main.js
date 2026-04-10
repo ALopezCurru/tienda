@@ -1,165 +1,15 @@
 "use strict";
 //========================================================
-//Definiendo Objetos del DOM
-const contenedorProductosEnOferta = document.querySelector(
-  "#productosContenedor",
-);
-const contenedorCatalogo = document.querySelector(
-  "#productosCatalogoContenedor",
-);
-const contenedorCarrito = document.querySelector("#productosContenedorCarrito");
-const modalCatalogo = document.querySelector("#modalCatalogo");
-const modalCompraConfirmacion = document.querySelector(
-  ".modalCompraConfirmacion",
-);
-const modalCarritoDeCompras = document.querySelector("#carritoDeCompras");
-const btnVerCatalogo = document.querySelector("#verCatalogo");
-const btnCarritoDeCompras = document.querySelector("#btnCarritoDeCompras");
-const btnCerrarCarritoDeCompras = document.querySelector(
-  "#cerrarCarritoDeCompras",
-);
-const btnLogoCatalogo = document.querySelector("#logoNavBarCatalogo");
-const DOMSubTotal = document.querySelector("#subTotal");
-const DOMTotal = document.querySelector("#total");
-const cerrarCatalogo = document.querySelector("#cerrarModalCatalogo");
-const btnCarritoEnCatalogo = document.querySelector("#carritoEnCatalogo");
-const finalizarCompra = document.querySelector("#finalizarCompra");
-const regresarAComprar = document.querySelector("#regresarAComprar");
+import { productos } from "./products.js";
+import { DOM } from "./DOMObjects.js";
+
 //========================================================
 //definiendo arrays de objetos
-const descuento = 15;
+
 const productosConDescuento = [];
 const productosSinDescuento = [];
 const carritoDeCompras = [];
 const subTotales = [];
-const productos = [
-  {
-    id: 1,
-    nombre: "Celular marca patito",
-    descripcion: "Telefono celular 8GB ram 1TB almacenamiento",
-    precio: 1000,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/pexels-igchandankumar-16442035.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 2,
-    nombre: "Headsets",
-    descripcion: "Headsets diseñados para la mayor comodidad",
-    precio: 500,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/Headsets.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 3,
-    nombre: "Audifonos inalambricos",
-    descripcion: "Audifonos inalambricos color blanco",
-    precio: 800,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/audifonosInalambricos.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 4,
-    nombre: "Combo teclado y mouse",
-    descripcion: "Combo de teclado y mouse",
-    precio: 1000,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/tecladoMouse.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 5,
-    nombre: "USB Hub",
-    descripcion: "Hub USB con diferentes entradas",
-    precio: 250,
-    oferta: false,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/usbHub.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 6,
-    nombre: "Adaptador tipo C",
-    descripcion: "Adaptador tipo C a usb",
-    precio: 100,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/adaptadorUSB.jpg",
-    categoria: "prueba",
-  },
-  {
-    id: 7,
-    nombre: "Objeto 7 ejemplo",
-    descripcion: "Adaptador tipo C a usb",
-    precio: 50,
-    oferta: true,
-    stock: 100,
-    descuento: descuento / 100,
-    activo: function () {
-      if (this.stock > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    imagen: "./img/productos/adaptadorUSB.jpg",
-    categoria: "prueba",
-  },
-];
 
 //========================================================
 // Funcion para agregar los productos al array de productos en oferta y los que no estan en oferta
@@ -185,6 +35,7 @@ function productosEnDescuento(array) {
         precio: precio - precio * descuento,
         imagen: imagen,
         oferta: oferta,
+        ahorro: precio - (precio - precio * descuento),
       });
     } else if (!oferta) {
       productosSinDescuento.push({
@@ -201,19 +52,17 @@ function productosEnDescuento(array) {
 }
 productosEnDescuento(productos);
 //========================================================
-
 const productosGeneral = [];
 productosGeneral.push(...productosConDescuento, ...productosSinDescuento);
-
 ///========================================================
 //Destrucurando el array de objetos con descuentos para mostarlo en el array
 function mostrandoObjetosConDescuentosEnDOM(array) {
   let tarjetaOfertas;
   const entries = Object.entries(array);
-  contenedorProductosEnOferta.innerHTML = "";
+  DOM.contenedorProductosEnOferta.innerHTML = "";
   for (let [
     key,
-    { id, nombre, descripcion, precio, imagen, activo, precioAnterior },
+    { id, nombre, descripcion, precio, imagen, activo, precioAnterior, ahorro },
   ] of entries) {
     if (activo) {
       tarjetaOfertas = `
@@ -230,7 +79,8 @@ function mostrandoObjetosConDescuentosEnDOM(array) {
                   <p class="productoDescripcion">${descripcion}</p>
                   <p class = "precios">Precio anterior Q.<span class="precioAnterior">${precioAnterior}</span></p>
                   <b class = "precios"><p>Precio con descuento: Q.<span class="productoPrecio">${precio}</span></p></b>
-                </div>
+                  <b class = "ahorro"> Ahorraras:  Q.${ahorro} </b>
+                  </div>
                 <div class="productoBotones">
                     <button class="comprar" id="${id}">Comprar!</button>
                     <button class="productoMasInformacion">Ver detalles!</button>
@@ -239,19 +89,17 @@ function mostrandoObjetosConDescuentosEnDOM(array) {
       `;
     }
     //
-    contenedorProductosEnOferta.insertAdjacentHTML(
+    DOM.contenedorProductosEnOferta.insertAdjacentHTML(
       "afterbegin",
       tarjetaOfertas,
     );
   }
 }
-
 mostrandoObjetosConDescuentosEnDOM(productosConDescuento);
-
 //========================================================
 // Destructurando array de objetos en general para agregar los productos al catalogo
-function agregarObjetosAlCatalogo(array) {
-  contenedorCatalogo.innerHTML = " ";
+export function agregarObjetosAlCatalogo(array) {
+  DOM.contenedorCatalogo.innerHTML = " ";
   const values = Object.values(array);
   let htmlCatalogo = "";
   for (const {
@@ -263,6 +111,7 @@ function agregarObjetosAlCatalogo(array) {
     imagen,
     oferta,
     precioAnterior,
+    ahorro,
   } of values) {
     if (oferta) {
       console.log(`${id} - ${nombre} - ${oferta}`);
@@ -280,7 +129,8 @@ function agregarObjetosAlCatalogo(array) {
                   <p class="productoDescripcion">${descripcion}</p>
                   <p class = "precios">Precio anterior Q.<span class="precioAnterior">${precioAnterior}</span></p>
                   <b class = "precios"><p>Precio con descuento: Q.<span class="productoPrecio">${precio}</span></p></b>
-                </div>
+                  <b class = "ahorro"> Ahorraras:  Q.${ahorro} </b>
+                  </div>
                 <div class="productoBotones">
                     <button class="comprar" id="${id}">Comprar!</button>
                     <button class="productoMasInformacion">Ver detalles!</button>
@@ -312,32 +162,13 @@ function agregarObjetosAlCatalogo(array) {
     `;
     }
 
-    contenedorCatalogo.insertAdjacentHTML("afterbegin", htmlCatalogo);
+    DOM.contenedorCatalogo.insertAdjacentHTML("afterbegin", htmlCatalogo);
   }
 }
-
 agregarObjetosAlCatalogo(productosGeneral);
-
 //========================================================
 // Definiendo active listeners
 
-btnVerCatalogo.addEventListener("click", function () {
-  modalCatalogo.classList.remove("hidden");
-  // modalCatalogo.classList.add("center");
-  console.log("si funca");
-  window.scrollTo(0, 0);
-});
-
-btnCarritoDeCompras.addEventListener("click", function () {
-  modalCarritoDeCompras.classList.remove("hidden");
-  agregarProductosAlCarrito(carritoDeCompras);
-  calcularTotales(subTotales);
-});
-
-btnCerrarCarritoDeCompras.addEventListener("click", function () {
-  modalCarritoDeCompras.classList.add("hidden");
-  window.scrollTo(0, 0);
-});
 // Definiendo funcionalidades de comprar y ver detalles
 // Abrir modal de confirmacion de compra
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -345,11 +176,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
   btnComprar.forEach((el) => {
     el.addEventListener("click", function (e) {
       let htmlcarrito = "";
-      modalCompraConfirmacion.classList.remove("hidden");
-      modalCompraConfirmacion.classList.add("center");
+      DOM.modalCompraConfirmacion.classList.remove("hidden");
+      DOM.modalCompraConfirmacion.classList.add("center");
       const btnSeleccionado = e.target.id;
       const values = Object.values(productosGeneral);
-      modalCompraConfirmacion.innerHTML = "";
+      DOM.modalCompraConfirmacion.innerHTML = "";
       for (const { id, nombre, precio, descripcion, imagen } of values) {
         if (id == Number(btnSeleccionado)) {
           htmlcarrito = `
@@ -381,7 +212,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           `;
         }
       }
-      modalCompraConfirmacion.insertAdjacentHTML("afterbegin", htmlcarrito);
+      DOM.modalCompraConfirmacion.insertAdjacentHTML("afterbegin", htmlcarrito);
       //Cerrar modal de confirmacion de compra
       cerrarModalCompraConfirmacion();
       // Cerrar modald de compra
@@ -391,28 +222,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
   });
 });
 
-cerrarCatalogo.addEventListener("click", function () {
-  modalCatalogo.classList.add("hidden");
-});
-
-btnCarritoEnCatalogo.addEventListener("click", function () {
-  modalCarritoDeCompras.classList.remove("hidden");
-  agregarProductosAlCarrito(carritoDeCompras);
-  calcularTotales(subTotales);
-});
-
-finalizarCompra.addEventListener("click", function () {
-  console.log("hola");
-  carritoDeCompras.length = 0;
-
-  contenedorCarrito.innerHTML = "";
-  alert("Gracias por tu compra :)");
-});
-
-regresarAComprar.addEventListener("click", function () {
-  modalCarritoDeCompras.classList.add("hidden");
-  console.log("hola");
-});
 //========================================================
 
 // Funcion para cerrar el modal de compra - despues de darle click a comprar en la tarjeta
@@ -424,8 +233,8 @@ function cerrarModalCompraConfirmacion() {
     el.addEventListener("click", function (e) {
       let modalSeleccionado = e.target;
       console.log(modalSeleccionado);
-      modalCompraConfirmacion.classList.remove("center");
-      modalCompraConfirmacion.classList.add("hidden");
+      DOM.modalCompraConfirmacion.classList.remove("center");
+      DOM.modalCompraConfirmacion.classList.add("hidden");
     });
   });
 }
@@ -441,7 +250,7 @@ function calcularSubTotalProducto() {
       console.log(`id: ${btnComprar} - ${inputNumeroProductos}`);
 
       let values = Object.values(productosGeneral);
-      for (const { nombre, id, precio, imagen } of values) {
+      for (const { nombre, id, precio, imagen, ahorro } of values) {
         if (id == btnComprar && Number(inputNumeroProductos) > 0) {
           let subTotal = precio * Number(inputNumeroProductos);
           carritoDeCompras.push({
@@ -450,15 +259,17 @@ function calcularSubTotalProducto() {
             imagen: imagen,
             cantidad: inputNumeroProductos,
             subTotal: subTotal,
+            ahorro: ahorro * inputNumeroProductos,
           });
+
           subTotales.push(Number(subTotal));
           console.log(subTotales);
           console.log(carritoDeCompras);
         }
       }
       // Cerrar modal de confirmacion despues de confirmar compra
-      modalCompraConfirmacion.classList.remove("center");
-      modalCompraConfirmacion.classList.add("hidden");
+      DOM.modalCompraConfirmacion.classList.remove("center");
+      DOM.modalCompraConfirmacion.classList.add("hidden");
     });
   });
 }
@@ -479,8 +290,8 @@ function calcularTotales(array) {
 //Funcion para mostrar los elementos en el carrito
 function agregarProductosAlCarrito(array) {
   const values = Object.values(array);
-  contenedorCarrito.innerHTML = "";
-  for (const { nombre, cantidad, subTotal, id, imagen } of values) {
+  DOM.contenedorCarrito.innerHTML = "";
+  for (const { nombre, cantidad, subTotal, id, imagen, ahorro } of values) {
     let html = `
    <div class="tarjetaProductoCarrito">
           <div class="contenedorImagenCarrito">
@@ -489,10 +300,66 @@ function agregarProductosAlCarrito(array) {
           <div class="contenedorInformacionCarrito">
             <h2><span class="cantidadProductos">${cantidad}</span> - ${nombre}</h2>
           <p>${subTotal}</p>
+          <p class="ahorro">--Ahorraras: ${ahorro}--</p>
           
           </div>
         </div>
   `;
-    contenedorCarrito.insertAdjacentHTML("afterbegin", html);
+    DOM.contenedorCarrito.insertAdjacentHTML("afterbegin", html);
   }
 }
+
+function calcularAhorro(array) {
+  let totalAhorro = 0;
+  const values = Object.values(array);
+  for (const { ahorro } of values) {
+    totalAhorro = totalAhorro + ahorro;
+  }
+  DOM.ahorroTotalCarrito.innerHTML = totalAhorro;
+}
+
+//========================================================
+//========================================================
+DOM.btnVerCatalogo.addEventListener("click", function () {
+  DOM.modalCatalogo.classList.remove("hidden");
+  // modalCatalogo.classList.add("center");
+  console.log("si funca");
+  window.scrollTo(0, 0);
+});
+
+DOM.btnCarritoDeCompras.addEventListener("click", function () {
+  DOM.modalCarritoDeCompras.classList.remove("hidden");
+  agregarProductosAlCarrito(carritoDeCompras);
+  calcularTotales(subTotales);
+  calcularAhorro(carritoDeCompras);
+});
+
+DOM.btnCerrarCarritoDeCompras.addEventListener("click", function () {
+  DOM.modalCarritoDeCompras.classList.add("hidden");
+  window.scrollTo(0, 0);
+});
+
+DOM.cerrarCatalogo.addEventListener("click", function () {
+  DOM.modalCatalogo.classList.add("hidden");
+});
+
+DOM.btnCarritoEnCatalogo.addEventListener("click", function () {
+  DOM.modalCarritoDeCompras.classList.remove("hidden");
+  agregarProductosAlCarrito(carritoDeCompras);
+  calcularTotales(subTotales);
+});
+
+DOM.finalizarCompra.addEventListener("click", function () {
+  console.log("hola");
+  carritoDeCompras.length = 0;
+
+  DOM.contenedorCarrito.innerHTML = "";
+  alert("Gracias por tu compra :)");
+});
+
+DOM.regresarAComprar.addEventListener("click", function () {
+  DOM.modalCarritoDeCompras.classList.add("hidden");
+  console.log("hola");
+});
+//========================================================
+//========================================================

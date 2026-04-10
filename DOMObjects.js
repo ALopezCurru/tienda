@@ -1,0 +1,20 @@
+"use strict";
+export const DOM = {
+  contenedorProductosEnOferta: document.querySelector("#productosContenedor"),
+  contenedorCatalogo: document.querySelector("#productosCatalogoContenedor"),
+  contenedorCarrito: document.querySelector("#productosContenedorCarrito"),
+  modalCatalogo: document.querySelector("#modalCatalogo"),
+  modalCompraConfirmacion: document.querySelector(".modalCompraConfirmacion"),
+  modalCarritoDeCompras: document.querySelector("#carritoDeCompras"),
+  btnVerCatalogo: document.querySelector("#verCatalogo"),
+  btnCarritoDeCompras: document.querySelector("#btnCarritoDeCompras"),
+  btnCerrarCarritoDeCompras: document.querySelector("#cerrarCarritoDeCompras"),
+  btnLogoCatalogo: document.querySelector("#logoNavBarCatalogo"),
+  DOMSubTotal: document.querySelector("#subTotal"),
+  DOMTotal: document.querySelector("#total"),
+  cerrarCatalogo: document.querySelector("#cerrarModalCatalogo"),
+  btnCarritoEnCatalogo: document.querySelector("#carritoEnCatalogo"),
+  finalizarCompra: document.querySelector("#finalizarCompra"),
+  regresarAComprar: document.querySelector("#regresarAComprar"),
+  ahorroTotalCarrito: document.querySelector("#ahorroTotalSpan"),
+};

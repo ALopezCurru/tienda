@@ -162,7 +162,7 @@ nav {
 /* Productos en oferta */
 #productosEnOferta {
   width: 100%;
-  height: 100vh;
+  height: 120vh;
   position: relative;
 }
 #productosContenedor {
@@ -222,7 +222,7 @@ nav {
 
 .productoInformacion {
   width: 80%;
-  height: 150px;
+  height: 180px;
   padding-top: 4vh;
 }
 
@@ -620,4 +620,10 @@ nav {
   display: flex;
   align-items: center;
   justify-content: end;
+}
+
+.ahorro {
+  font-family: "Roboto", sans-serif;
+  color: gray;
+  font-weight: bolder;
 }
