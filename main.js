@@ -304,7 +304,10 @@ function calcularAhorro(array) {
   let totalAhorro = 0;
   const values = Object.values(array);
   for (const { ahorro } of values) {
-    totalAhorro = totalAhorro + ahorro;
+    if (!Number(ahorro)) continue;
+    else {
+      totalAhorro = totalAhorro + ahorro;
+    }
   }
   DOM.ahorroTotalCarrito.innerHTML = totalAhorro;
 }
